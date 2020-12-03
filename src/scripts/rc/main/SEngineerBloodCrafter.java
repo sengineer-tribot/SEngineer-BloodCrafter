@@ -85,7 +85,7 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 
 		utils.configureDaxWalker();
 		Mouse.setSpeed(100 + rand.nextInt(130));
-		Mouse.scroll(false, +rand.nextInt(20));
+		Mouse.scroll(false, rand.nextInt(20));
 
 		General.useAntiBanCompliance(true);
 		abc2Support = ABC2Support.getInstance();

@@ -323,32 +323,4 @@ public class Utils {
 		return (System.currentTimeMillis() - startTime) > time ? true : false;
 	}
 
-	/**
-	 * Returns a gaussian value
-	 * 
-	 * @param mean   - mean value
-	 * @param stdDev - standard deviation
-	 * @param max    - max number
-	 * @param min    - min number
-	 * @return - random number
-	 *
-	 * @author Swiss
-	 */
-	public static double getGaussian(float mean, float stdDev, float max, float min) {
-		double randNormal;
-		Random rand = new Random(); // reuse this if you are generating many
-		double u1 = 1.0 - rand.nextDouble(); // uniform(0,1] random doubles
-		double u2 = 1.0 - rand.nextDouble();
-		double randStdNormal = Math.sqrt(-2.0 * Math.log(u1)) * Math.sin(2.0 * Math.PI * u2); // random normal(0,1)
-		randNormal = mean + stdDev * randStdNormal; // random normal(mean,stdDev^2)
-
-		if (randNormal > max) {
-			randNormal = max;
-		} else if (randNormal < min) {
-			randNormal = min;
-		}
-
-		return randNormal;
-	}
-
 }
