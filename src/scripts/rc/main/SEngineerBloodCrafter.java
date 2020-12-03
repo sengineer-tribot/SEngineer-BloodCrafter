@@ -84,7 +84,7 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 		General.println("[BloodCrafting] Configuring SEngineer's BloodCrafter");
 
 		utils.configureDaxWalker();
-		Mouse.setSpeed(100 + rand.nextInt(130));
+		Mouse.setSpeed(100 + rand.nextInt(30));
 		Mouse.scroll(false, rand.nextInt(20));
 
 		General.useAntiBanCompliance(true);
