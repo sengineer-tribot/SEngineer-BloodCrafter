@@ -1,7 +1,6 @@
 package scripts.rc.utils;
 
 import java.awt.Point;
-import java.util.Random;
 
 import org.tribot.api.Clicking;
 import org.tribot.api.DynamicClicking;
@@ -296,7 +295,7 @@ public class Utils {
 		while (!isPlayerCloseTo(destination)) {
 			General.println(String.format("[BloodCrafting] Attempting to walk to (%s)", destination.toString()));
 			DaxWalker.walkTo(destination);
-			General.sleep(Numbers.FIVE_SECONDS, Numbers.EIGHT_SECONDS);
+			General.sleep(5000, 8000);
 		}
 		General.println(String.format("[BloodCrafting] Cancelling walk - We are already close to (%s)", destination.toString()));
 	}
@@ -320,7 +319,7 @@ public class Utils {
 	 * @return true/false
 	 */
 	public static boolean isTimeElapsed(final long startTime, final long time) {
-		return (System.currentTimeMillis() - startTime) > time ? true : false;
+		return (System.currentTimeMillis() - startTime) > time;
 	}
 
 }

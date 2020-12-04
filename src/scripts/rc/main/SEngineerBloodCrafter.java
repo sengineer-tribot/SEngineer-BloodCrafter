@@ -21,7 +21,6 @@ import scripts.rc.paint.PaintInfo;
 import scripts.rc.support.ABC2Support;
 import scripts.rc.utils.IDs.ItemID;
 import scripts.rc.utils.IDs.ObjectID;
-import scripts.rc.utils.Numbers;
 import scripts.rc.utils.Utils;
 
 @ScriptManifest(authors = {
@@ -42,7 +41,9 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	
 	private final FluffeesPaint display = new FluffeesPaint(
 			this, FluffeesPaint.PaintLocations.TOP_RIGHT_CHATBOX,
-			new Color[] { new Color(255, 251, 255) }, "Trebuchet MS", new Color[] { new Color(93, 156, 236, 127) },
+			new Color[] { new Color(255, 251, 255) }, 
+			"Trebuchet MS", 
+			new Color[] { new Color(93, 156, 236, 127) },
 			new Color[] { new Color(39, 95, 175) }, 1, false, 5, 3, 0);
 
 	// ~~~ Support Classes
@@ -97,7 +98,8 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	}
 
 	/**
-	 * 1. Configure the DaxWalker 2. Crafts Blood Runes
+	 * 1. Configure the DaxWalker 
+	 * 2. Crafts Blood Runes
 	 */
 	@Override
 	public void run() {
@@ -189,7 +191,7 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	 */
 	public void chipDenseEssenceBlocks() {
 		utils.interactWithObject(ObjectID.DENSE_RUNESTONE, "Chip");
-		General.sleep(Numbers.THREE_TICKS, Numbers.FOUR_TICKS);
+		General.sleep(1800, 2400);
 		abc2Support.runAntiBan();
 		Timing.waitCondition(() -> !utils.isPlayerMiningDenseEssence(), 30000);
 	}
@@ -199,7 +201,7 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	 */
 	public void venerateEssenceBlocks() {
 		utils.interactWithObject(ObjectID.DARK_ALTAR, "Venerate");
-		General.sleep(Numbers.THREE_TICKS, Numbers.FOUR_TICKS);
+		General.sleep(1800, 2400);
 		Timing.waitCondition(() -> !utils.inventoryContains(ItemID.DENSE_ESSENCE_BLOCK), 5000);
 	}
 
@@ -208,7 +210,7 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	 */
 	public void bindBloodRunes() {
 		utils.interactWithObject(ObjectID.BLOOD_ALTAR, "Bind");
-		General.sleep(Numbers.THREE_TICKS, Numbers.FOUR_TICKS);
+		General.sleep(1800, 2400);
 		Timing.waitCondition(() -> !utils.inventoryContains(ItemID.DARK_ESSENCE_FRAGMENTS), 5000);
 	}
 
@@ -280,42 +282,41 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	 * @return - item id of the pickaxe
 	 */
 	public boolean canUsePickaxe(final int pickaxe) {
-		boolean canUse = true;
 
 		if (pickaxe == -1) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.CRYSTAL_PICKAXE[0] && Skills.getActualLevel(SKILLS.MINING) < 71) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.CRYSTAL_PICKAXE[1] && Skills.getActualLevel(SKILLS.MINING) < 71) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.INACTIVE_CRYSTAL_PICKAXE) {
-			canUse = false;
-		} else if (pickaxe == ItemID.INFERNAL_PICKAXE&& (Skills.getActualLevel(SKILLS.MINING) < 71 || Skills.getActualLevel(SKILLS.SMITHING) < 85)) {
-			canUse = false;
+			return false;
+		} else if (pickaxe == ItemID.INFERNAL_PICKAXE && (Skills.getActualLevel(SKILLS.MINING) < 71 || Skills.getActualLevel(SKILLS.SMITHING) < 85)) {
+			return false;
 		} else if (pickaxe == ItemID.UNCHARGED_INFERNAL_PICKAXE) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.THIRD_AGE_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 61) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.DRAGON_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 61) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.GILDED_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 41) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.RUNE_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 41) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.ADAMANT_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 31) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.MITHRIL_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 21) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.BLACK_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 11) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.STEEL_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 6) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.IRON_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 1) {
-			canUse = false;
+			return false;
 		} else if (pickaxe == ItemID.BRONZE_PICKAXE && Skills.getActualLevel(SKILLS.MINING) < 1) {
-			canUse = false;
+			return false;
 		}
 
-		return canUse;
+		return true;
 	}
 }
