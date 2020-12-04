@@ -16,7 +16,7 @@ public class IDs {
 	 * 
 	 * This class contains all of the Animation IDs
 	 * 
-	 * @author AK47
+	 * @author SEngineer
 	 *
 	 */
 	public static class AnimationID {
@@ -30,7 +30,7 @@ public class IDs {
 	 * 
 	 * This class contains all of the Item IDs
 	 * 
-	 * @author AK47
+	 * @author SEngineer
 	 *
 	 */
 	public static class ItemID {
@@ -66,7 +66,7 @@ public class IDs {
 	 * 
 	 * This class contains all of the Object IDs
 	 * 
-	 * @author AK47
+	 * @author SEngineer
 	 *
 	 */
 	public static class ObjectID {

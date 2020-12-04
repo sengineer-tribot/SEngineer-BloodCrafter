@@ -191,7 +191,7 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	 */
 	public void chipDenseEssenceBlocks() {
 		utils.interactWithObject(ObjectID.DENSE_RUNESTONE, "Chip");
-		General.sleep(1800, 2400);
+		General.sleep(1800, 2400); // Wait for player to start animating
 		abc2Support.runAntiBan();
 		Timing.waitCondition(() -> !utils.isPlayerMiningDenseEssence(), 30000);
 	}
@@ -201,7 +201,6 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	 */
 	public void venerateEssenceBlocks() {
 		utils.interactWithObject(ObjectID.DARK_ALTAR, "Venerate");
-		General.sleep(1800, 2400);
 		Timing.waitCondition(() -> !utils.inventoryContains(ItemID.DENSE_ESSENCE_BLOCK), 5000);
 	}
 
@@ -210,7 +209,6 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	 */
 	public void bindBloodRunes() {
 		utils.interactWithObject(ObjectID.BLOOD_ALTAR, "Bind");
-		General.sleep(1800, 2400);
 		Timing.waitCondition(() -> !utils.inventoryContains(ItemID.DARK_ESSENCE_FRAGMENTS), 5000);
 	}
 
@@ -229,36 +227,34 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 	 */
 	public boolean isPreparedToRC() {
 
-		boolean isPrepared = true;
-
 		if (Skills.getActualLevel(SKILLS.RUNECRAFTING) < 77) {
 			General.println("[BloodCrafting] ERROR: You need to have 77 Runecrafting to run this script!");
-			isPrepared = false;
+			return false;
 		}
 
 		if (Skills.getActualLevel(SKILLS.MINING) < 38) {
 			General.println("[BloodCrafting] ERROR: You need to have 38 Mining to run this script!");
-			isPrepared = false;
+			return false;
 		}
 
 		if (Skills.getActualLevel(SKILLS.CRAFTING) < 38) {
 			General.println("[BloodCrafting] ERROR: You need to have 38 Crafting to run this script!");
-			isPrepared = false;
+			return false;
 		}
 
 		if (RSVarBit.get(4896).getValue() != 1000) {
 			General.println("[BloodCrafting] ERROR: You need to have 100% Arceuus Favour to run this script!");
-			isPrepared = false;
+			return false;
 		}
 
 		if (!utils.isWieldingPickaxe() && !utils.inventoryContains(ItemID.PICKAXES)) {
 			General.println("[BloodCrafting] ERROR: You need to be have a useable pickaxe to run this script!");
-			isPrepared = false;
+			return false;
 		}
 
 		if (!canUsePickaxe(utils.getPlayerPickaxe())) {
 			General.println("[BloodCrafting] ERROR: You cannot use the current pickaxe you have! Please change the pickaxe!");
-			isPrepared = false;
+			return false;
 		}
 
 		if (!utils.inventoryContains(ItemID.CHISEL)) {
@@ -267,14 +263,14 @@ public class SEngineerBloodCrafter extends Script implements PaintInfo, Painting
 			utils.walkTo(new RSTile(1761, 3856, 0));
 			utils.takeNearbyNonStackable(ItemID.CHISEL, 20);
 			Timing.waitCondition(() -> utils.inventoryContains(ItemID.CHISEL), 10000);
-			utils.dragItemToSlot(ItemID.CHISEL, 7, 4, 6);
 			if (!utils.inventoryContains(ItemID.CHISEL)) {
 				General.println("[BloodCrafting] ERROR: You need to have a chisel to run this script!");
-				isPrepared = false;
+				return false;
 			}
+			utils.dragItemToSlot(ItemID.CHISEL, 7, 4, 6);
 		}
 
-		return isPrepared;
+		return true;
 	}
 	
 	/**

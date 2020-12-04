@@ -5,6 +5,7 @@ import java.awt.Point;
 import org.tribot.api.Clicking;
 import org.tribot.api.DynamicClicking;
 import org.tribot.api.General;
+import org.tribot.api.Timing;
 import org.tribot.api.input.Mouse;
 import org.tribot.api.interfaces.Positionable;
 import org.tribot.api2007.Camera;
@@ -295,7 +296,7 @@ public class Utils {
 		while (!isPlayerCloseTo(destination)) {
 			General.println(String.format("[BloodCrafting] Attempting to walk to (%s)", destination.toString()));
 			DaxWalker.walkTo(destination);
-			General.sleep(5000, 8000);
+			Timing.waitCondition(() -> isPlayerCloseTo(destination), 8000);
 		}
 		General.println(String.format("[BloodCrafting] Cancelling walk - We are already close to (%s)", destination.toString()));
 	}
